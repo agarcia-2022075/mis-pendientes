@@ -1,14 +1,15 @@
 // Tareas iniciales de ejemplo (mínimo 3 tareas)
 const DEFAULT_TASKS = [
-  { id: 1, text: "Comprar víveres para la semana", completed: false },
-  { id: 2, text: "Repasar la lección de programación", completed: false },
-  { id: 3, text: "Organizar los apuntes de la clase", completed: false },
-  { id: 4, text: "Preparar la entrega del mini proyecto", completed: true }
+  { id: 1, text: "Comprar víveres para la semana", completed: false, priority: "media" },
+  { id: 2, text: "Repasar la lección de programación", completed: false, priority: "alta" },
+  { id: 3, text: "Organizar los apuntes de la clase", completed: false, priority: "baja" },
+  { id: 4, text: "Preparar la entrega del mini proyecto", completed: true, priority: "alta" }
 ];
 
 // Elementos del DOM
 const todoForm = document.getElementById('todo-form');
 const todoInput = document.getElementById('todo-input');
+const prioritySelect = document.getElementById('priority-select');
 const todoList = document.getElementById('todo-list');
 const emptyState = document.getElementById('empty-state');
 const statsCounter = document.getElementById('stats-counter');
@@ -68,8 +69,13 @@ function renderTasks() {
       span.className = 'todo-text';
       span.textContent = task.text;
 
+      const priorityBadge = document.createElement('span');
+      priorityBadge.className = `priority-tag priority-${task.priority || 'media'}`;
+      priorityBadge.textContent = task.priority || 'media';
+
       leftDiv.appendChild(checkbox);
       leftDiv.appendChild(span);
+      leftDiv.appendChild(priorityBadge);
 
       // Botón para eliminar
       const deleteBtn = document.createElement('button');
@@ -88,11 +94,12 @@ function renderTasks() {
 }
 
 // Agregar tarea
-function addTask(text) {
+function addTask(text, priority = 'media') {
   const newTask = {
     id: Date.now(),
     text: text.trim(),
-    completed: false
+    completed: false,
+    priority: priority
   };
 
   tasks.unshift(newTask);
@@ -123,9 +130,11 @@ function deleteTask(id) {
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const text = todoInput.value.trim();
+  const priority = prioritySelect.value;
   if (text) {
-    addTask(text);
+    addTask(text, priority);
     todoInput.value = '';
+    prioritySelect.value = 'media';
     todoInput.focus();
   }
 });
