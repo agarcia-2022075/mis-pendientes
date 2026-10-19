@@ -1,12 +1,12 @@
-//Tareas iniciales de ejemplo (mínimo 3 tareas)
-let tasks = [
+// Tareas iniciales de ejemplo (mínimo 3 tareas)
+const DEFAULT_TASKS = [
   { id: 1, text: "Comprar víveres para la semana", completed: false },
   { id: 2, text: "Repasar la lección de programación", completed: false },
   { id: 3, text: "Organizar los apuntes de la clase", completed: false },
   { id: 4, text: "Preparar la entrega del mini proyecto", completed: true }
 ];
 
-//Elementos del DOM
+// Elementos del DOM
 const todoForm = document.getElementById('todo-form');
 const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
@@ -14,7 +14,20 @@ const emptyState = document.getElementById('empty-state');
 const statsCounter = document.getElementById('stats-counter');
 const filterButtons = document.querySelectorAll('.filter-btn');
 
+// Estado de la aplicación
+let tasks = [];
 let currentFilter = 'all';
+
+// Guardar en localStorage
+function saveTasks() {
+  localStorage.setItem('mis_pendientes_tasks', JSON.stringify(tasks));
+}
+
+// Cargar desde localStorage
+function loadTasks() {
+  const saved = localStorage.getItem('mis_pendientes_tasks');
+  tasks = saved ? JSON.parse(saved) : [...DEFAULT_TASKS];
+}
 
 // Actualizar contador
 function updateStats() {
@@ -22,7 +35,7 @@ function updateStats() {
   statsCounter.textContent = `${pendingCount} de ${tasks.length} pendientes`;
 }
 
-//rwnderizar la lista de tareas
+// Renderizar la lista de tareas
 function renderTasks() {
   todoList.innerHTML = '';
 
@@ -58,7 +71,7 @@ function renderTasks() {
       leftDiv.appendChild(checkbox);
       leftDiv.appendChild(span);
 
-      //Botón para eliminar
+      // Botón para eliminar
       const deleteBtn = document.createElement('button');
       deleteBtn.className = 'btn-delete';
       deleteBtn.innerHTML = '&times;';
@@ -73,7 +86,8 @@ function renderTasks() {
 
   updateStats();
 }
-//Agregar tarea
+
+// Agregar tarea
 function addTask(text) {
   const newTask = {
     id: Date.now(),
@@ -82,10 +96,11 @@ function addTask(text) {
   };
 
   tasks.unshift(newTask);
+  saveTasks();
   renderTasks();
 }
 
-//Marcar o desmarcar tarea terminada
+// Marcar o desmarcar tarea terminada
 function toggleTask(id) {
   tasks = tasks.map(task => {
     if (task.id === id) {
@@ -93,15 +108,18 @@ function toggleTask(id) {
     }
     return task;
   });
-  renderTasks();
-}
-//Eliminar tarea
-function deleteTask(id) {
-  tasks = tasks.filter(task => task.id !== id);
+  saveTasks();
   renderTasks();
 }
 
-//Evento al enviar formulario
+// Eliminar tarea
+function deleteTask(id) {
+  tasks = tasks.filter(task => task.id !== id);
+  saveTasks();
+  renderTasks();
+}
+
+// Evento al enviar formulario
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const text = todoInput.value.trim();
@@ -112,7 +130,7 @@ todoForm.addEventListener('submit', (e) => {
   }
 });
 
-//Eventos de los filtros
+// Eventos de los filtros
 filterButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     filterButtons.forEach(b => b.classList.remove('active'));
@@ -122,5 +140,6 @@ filterButtons.forEach(btn => {
   });
 });
 
-//Inicialización directa
+// Inicialización con persistencia
+loadTasks();
 renderTasks();
