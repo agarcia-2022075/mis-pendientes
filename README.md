@@ -58,10 +58,14 @@ La aplicación es una interfaz ligera desarrollada con **HTML5**, **CSS3** y **J
 
 ### Posibles mejoras a futuro
 - **Edición en línea:** Permitir modificar el texto de tareas ya existentes con doble clic o un botón de edición.
-- **Prioridades y fechas:** Asignar fechas límite o etiquetas de prioridad para categorizar los pendientes.
+- **Fechas de vencimiento:** Asignar fechas límite para cada pendiente.
 
 ---
 
 ## Sección 4: Mejoras aplicadas bajo criterio propio
 
-Una lista de tareas en memoria pierde los datos al recargar la página. Con criterio de usabilidad, integré persistencia con localStorage para que el usuario mantenga sus tareas reales guardadas en su navegador sin necesidad de montar una base de datos pesada.
+1. **Persistencia con `localStorage`:**
+   Una lista de tareas en memoria pierde los datos al recargar la página. Con criterio de usabilidad, integré persistencia con `localStorage` para que el usuario mantenga sus tareas reales guardadas en su navegador sin necesidad de montar una base de datos pesada.
+
+2. **Niveles de prioridad (Alta, Media, Baja):**
+   No todas las tareas tienen la misma urgencia en el día a día. Con criterio de organización y productividad, incorporé un selector de prioridades (Alta, Media, Baja) junto con etiquetas visuales de color, permitiendo al usuario jerarquizar de un vistazo sus actividades e identificar de inmediato los pendientes más críticos.
