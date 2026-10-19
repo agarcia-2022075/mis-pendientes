@@ -12,9 +12,9 @@ const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
 const emptyState = document.getElementById('empty-state');
 const statsCounter = document.getElementById('stats-counter');
+const filterButtons = document.querySelectorAll('.filter-btn');
 
-
-
+let currentFilter = 'all';
 
 // Actualizar contador
 function updateStats() {
