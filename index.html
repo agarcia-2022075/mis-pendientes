@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis pendientes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-container">
+    <header class="app-header">
+      <h1 class="title">Mis pendientes</h1>
+      <p class="subtitle">Organiza tus tareas del día a día</p>
+    </header>
+
+    <!-- Formulario para agregar tarea -->
+    <section class="add-section">
+      <form id="todo-form" class="todo-form">
+        <input 
+          type="text" 
+          id="todo-input" 
+          class="todo-input" 
+          placeholder="¿Qué necesitas hacer hoy?" 
+          autocomplete="off"
+          required
+        >
+        <button type="submit" class="btn-primary">Agregar</button>
+      </form>
+    </section>
+
+    <!-- Lista de tareas -->
+    <section class="list-section">
+      <ul id="todo-list" class="todo-list">
+        <!-- Renderizado dinámicamente con JavaScript -->
+      </ul>
+
+      <!-- Mensaje cuando la lista está vacía -->
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <p class="empty-title">No hay tareas en esta vista</p>
+        <p class="empty-subtitle">Agrega una nueva tarea para comenzar.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
