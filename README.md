@@ -64,7 +64,4 @@ La aplicación es una interfaz ligera desarrollada con **HTML5**, **CSS3** y **J
 
 ## Sección 4: Mejoras aplicadas bajo criterio propio
 
-### Persistencia local con `localStorage`
-- **Problema identificado:** Inicialmente la aplicación manejaba las tareas únicamente en memoria volátil. Al recargar la página o cerrar el navegador, cualquier tarea creada, completada o eliminada se perdía, obligando al usuario a empezar desde cero y restándole utilidad práctica.
-- **Solución implementada:** Se integró la API nativa de `localStorage` del navegador para sincronizar el estado del arreglo de tareas en cada acción (crear, alternar estado y eliminar), recuperando los datos almacenados automáticamente al abrir la aplicación.
-- **Justificación técnica y de UX:** Bajo criterio profesional de usabilidad y arquitectura de software, una aplicación de productividad debe garantizar la permanencia de la información del usuario sin obligar a montar una infraestructura compleja de backend o base de datos externa. `localStorage` ofrece una solución limpia, rápida, sin dependencias y de alta eficacia.
+Una lista de tareas en memoria pierde los datos al recargar la página. Con criterio de usabilidad, integré persistencia con localStorage para que el usuario mantenga sus tareas reales guardadas en su navegador sin necesidad de montar una base de datos pesada.
